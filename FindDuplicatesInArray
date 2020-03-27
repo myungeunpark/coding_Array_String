@@ -1,0 +1,123 @@
+
+[1] Using Sorting
+
+time O(N) , Array Rearrangement
+-----------------------------------------------------
+[JAVA]
+class Solution {
+    public int findDuplicate(int[] nums) {
+
+        Arrays.sort(nums);
+        for(int i=1; i<nums.length; i++){
+            
+            if(nums[i-1] == nums[i])
+                return nums[i];
+        }
+        return -1;
+    }
+}
+-----------------------------------------------------
+[KOTLIN]
+class Solution {
+    fun findDuplicate(nums: IntArray): Int {
+     
+        nums.sort()
+        for(i in 1..nums.size-1){
+            
+            if(nums[i-1] == nums[i]){
+                return nums[i]
+            }
+        }
+        
+        return -1
+    }
+}
+-----------------------------------------------------
+
+
+
+[2] Using HashSet
+
+    Time O(N) , Space O(N) 
+
+-----------------------------------------------------
+class Solution {
+    public int findDuplicate(int[] nums) {
+
+        HashSet<Integer> hash = new HashSet<>();
+        
+        for(int i=0; i< nums.length; i++){
+            
+            if(hash.contains(nums[i]))
+                return nums[i];
+            
+            hash.add(nums[i]);
+        }
+        
+        return -1;
+    }
+}
+-----------------------------------------------------
+[KOTLIN]
+class Solution {
+    fun findDuplicate(nums: IntArray): Int {
+     
+        var hash = HashSet<Int>()
+        for(item in nums){
+        
+            if(hash.contains(item))
+                return item
+            
+            hash.add(item)
+        }
+        
+        return -1
+    }
+}
+-----------------------------------------------------
+
+[3] method that is used to find cycle of LinkedList 
+
+    Times O(N) / Space O(1)
+------------------------------------------------------
+[JAVA]
+class Solution {
+    public int findDuplicate(int[] nums) {
+
+        int N = nums.length;
+        int slow = 0;
+        int fast = 1;
+        while(nums[slow] != nums[fast]){
+            
+            slow = (slow + 1) % N;
+            fast = (fast + 2) % N;
+            
+            if(slow == fast)
+                fast = (fast + 1) % N;           
+        }        
+        return nums[slow];
+    }
+}
+---------------------------------------------------------
+[KOTLIN]
+
+class Solution {
+    fun findDuplicate(nums: IntArray): Int {
+     
+        var slow : Int = 0
+        var fast : Int = 1
+        val N : Int = nums.size
+        
+        while(nums[slow] != nums[fast]){
+            
+            slow = (slow + 1) % N
+            fast = (fast + 2) % N
+            
+            if(slow == fast)
+                fast = (fast + 1) % N
+        }
+        
+        return nums[slow]
+    }
+}
+-----------------------------------------------------------
