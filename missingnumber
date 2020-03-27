@@ -80,7 +80,19 @@ class Solution {
     }
 }
 -------------------------------------------------------------
-
+[KOTLIN]
+class Solution {
+    fun missingNumber(nums: IntArray): Int {
+        
+        var missing : Int = nums.size
+        for(index in nums.indices)            
+            missing = missing xor (nums[index] xor index)
+        
+        return missing
+        
+    }
+}
+-------------------------------------------------------------
 
 
 [4] USING Sorted Array  - N * O(N)
