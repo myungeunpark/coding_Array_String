@@ -1,0 +1,116 @@
+## Missing Number 
+
+[1] Sum Formula (1~N)  -  O(N)  
+    total sum = N * (N+1) / 2
+    total sum - sum of array data = missing Number 
+
+[JAVA]
+-----------------------------------------------------------
+ class Solution {
+    public int missingNumber(int[] nums) {
+       
+      int total = nums.length * (nums.length + 1)/2;   
+      int sum = 0;  
+      for(int i=0; i< nums.length; i++)
+          sum += nums[i];   
+             
+      return total - sum;  
+    }
+}  
+------------------------------------------------------------
+[KOTLIN]
+
+class Solution {
+    fun missingNumber(nums: IntArray): Int {
+        
+        return nums.size * (nums.size + 1) / 2 - nums.sum()
+    }
+}
+------------------------------------------------------------
+ (issue) If the N is larger, the value can be overflow.
+ 
+
+[2] Number Subtraction Method - O(N)
+
+[JAVA] 
+-------------------------------------------------------------
+class Solution {
+    public int missingNumber(int[] nums) {
+        
+      int sum = nums.length;  
+      for(int i=0; i< nums.length; i++){
+          sum += i;
+          sum -= nums[i];          
+      }
+        
+      return sum;  
+    }
+}
+-----------------------------------------
+[KOTLIN]
+class Solution {
+  fun missingNumber(nums: IntArray): Int {
+        
+        var missing : Int = nums.size
+        for(inx in nums.indices){
+            
+            missing -= nums[inx]
+            missing += inx
+        }
+        
+        return missing
+    }
+}
+---------------------------------------
+
+
+[3] XOR operation  - O(N)
+
+[JAVA]
+-------------------------------------------------------------
+class Solution {
+    public int missingNumber(int[] nums) {
+                   
+      int ret = nums.length;
+      for(int i=0; i< nums.length; i++){
+          
+          ret ^= (i ^ nums[i]);
+      }
+      return ret;  
+    }
+}
+-------------------------------------------------------------
+
+
+
+[4] USING Sorted Array  - N * O(N)
+
+--------------------------------------------------------------
+[JAVA] 
+class Solution {
+    public int missingNumber(int[] nums) {
+                   
+      Arrays.sort(nums);        
+      for(int i=0; i< nums.length; i++){
+          if(nums[i] != i)
+              return i;
+      }
+      return nums.length;  
+    }
+}
+--------------------------------------------------------------
+[KOTLIN]
+class Solution {
+    fun missingNumber(nums: IntArray): Int {
+        
+        nums.sort()
+        for(index in nums.indices){
+            
+            if(nums[index] != index)
+                return index
+        }
+        
+        return nums.size
+        
+    }
+}
