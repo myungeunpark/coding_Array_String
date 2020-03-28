@@ -1,0 +1,81 @@
+
+https://leetcode.com/problems/two-sum/
+// find pair index
+-----------------------------------------------------------
+[JAVA]
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+  
+        HashMap<Integer, Integer> hash = new HashMap<>();
+        int [] ret = new int[2];
+        
+        for(int i=0; i<nums.length; i++){
+            
+            int diff = target - nums[i];
+            if(hash.containsKey(diff)){
+                   ret[0] = hash.get(diff);
+                   ret[1] = i;          
+                   break;         
+            }else{
+                
+                hash.put(nums[i], i);
+            }
+        }
+        
+        return ret;
+    }
+}
+----------------------------------------------------------
+[KOTLIN]
+class Solution {
+    fun twoSum(nums: IntArray, target: Int): IntArray {
+     
+        var ret = IntArray(2)
+        var map = HashMap<Int, Int>()
+        
+        for(i in nums.indices){
+            
+            val diff = target - nums[i]
+            if(map.contains(diff)){
+                
+                ret[0] = map.getValue(diff)
+                ret[1] = i
+            }else{
+                
+                map.put(nums[i], i)
+            }            
+        }
+        return ret        
+    }
+}
+-----------------------------------------------------------
+
+How to find all pairs on integer array whose sum is equal to given number?
+https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+----------------------------------------------------------------------------
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        
+        int start = 0; 
+        int end = numbers.length-1;
+        int [] ret = new int[2];
+            
+        while(start < end){
+            int sum = numbers[start] + numbers[end];
+            if(sum == target){
+                ret[0] = start+1;
+                ret[1] = end+1;
+                return ret;
+            }
+            
+            if(sum < target)
+                start++;
+            if(sum > target )
+                end--;
+        }
+        
+        return ret;
+        
+    }
+}
+----------------------------------------------------------------
