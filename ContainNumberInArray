@@ -1,0 +1,40 @@
+
+# Check if array contains a number.
+
+
+[1] Linear Search
+
+boolean check(int [] nums, int dat){
+
+      for(int i=0; i < nums.length; i++){
+          if(nums[i] == dat)
+            return true;
+      }
+      
+      return false;
+}
+
+
+[2] Binary Search - log N
+---------------------------------------------------------------------
+private boolean search(int [] nums, int start, int end, int dat) {
+		
+		if(start > end)
+			return false;
+		
+		int mid = start + (end - start)/2;
+		if(nums[mid] == dat)
+			return true;
+		
+		if(nums[mid] > dat)
+			return search(nums, start, mid-1, dat);
+		
+		if(nums[mid] < dat) 			
+			return search(nums, mid+1, end, dat);
+		
+		return false;
+	}
+	public boolean contain(int [] nums, int dat) {	
+    Arrays.sort(nums);
+    return search(nums, 0, nums.length-1, dat);		
+	}
