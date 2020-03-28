@@ -1,8 +1,13 @@
+## Find the duplicates number in array
+How to find duplicate number on Integer array in Java?
+
 
 [1] Using Sorting
 
 time O(N) , Array Rearrangement
 -----------------------------------------------------
+
+
 [JAVA]
 class Solution {
     public int findDuplicate(int[] nums) {
