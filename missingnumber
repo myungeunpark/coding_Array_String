@@ -1,4 +1,6 @@
 ## Missing Number 
+How to find the missing number in integer array of 1 to 100?
+
 
 [1] Sum Formula (1~N)  -  O(N)  
     total sum = N * (N+1) / 2
