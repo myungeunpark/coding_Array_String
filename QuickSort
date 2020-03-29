@@ -1,0 +1,44 @@
+# Quick Sort
+---------------------------------------------------------------------
+class Solution {
+    
+    public void sort(int [] nums, int start, int end){
+        
+        if(start >= end)
+            return;
+        
+        int wall = start;        
+        int pivot = end;        
+        
+        for(int i = start; i < end; i++){
+            
+            if(nums[pivot] > nums[i]){
+                swap(nums, wall, i);
+                wall++;
+            }
+        }
+        
+        swap(nums, wall, pivot);
+       
+        if(start < wall-1)
+            sort(nums, start, wall-1);
+        if(wall+1 < end)
+            sort(nums, wall+1, end);
+        
+    }
+    
+    private void swap (int[] nums, int i, int j){
+              
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    
+    public int[] sortArray(int[] nums) {
+        
+        sort(nums, 0, nums.length-1);
+        return nums;
+        
+    }
+}
+-----------------------------------------------------------------------
