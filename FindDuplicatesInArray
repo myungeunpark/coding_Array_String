@@ -4,7 +4,7 @@ How to find duplicate number on Integer array in Java?
 
 [1] Using Sorting
 
-time O(N) , Array Rearrangement
+time N* O(N) , Array Rearrangement
 -----------------------------------------------------
 
 
@@ -126,3 +126,41 @@ class Solution {
     }
 }
 -----------------------------------------------------------
+
+FindAllDuplicates - Time : O(N), Space O(1) 
+-----------------------------------------------------------
+[JAVA]
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        
+        List<Integer> list = new ArrayList<>();
+        
+        for(int i=0; i< nums.length; i++){
+            
+            int inx = Math.abs(nums[i]) - 1;
+            if(nums[inx] < 0){
+                list.add(Math.abs(nums[i]));                
+            }else{
+                nums[inx] = -nums[inx];
+            }
+        }
+        return list;
+        
+    }
+}
+------------------------------------------------------------
+[KOTLIN]
+class Solution {
+    fun findDuplicates(nums: IntArray): List<Int> {
+        var list = ArrayList<Int>()
+        for(i in nums.indices){
+            val inx = Math.abs(nums[i]) - 1;
+            if(nums[inx] < 0){
+                list.add(Math.abs(nums[i]));                
+            }else{
+                nums[inx] = -nums[inx];
+            }
+        }
+        return list;
+    }
+}
