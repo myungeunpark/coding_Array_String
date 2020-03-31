@@ -1,0 +1,51 @@
+
+# Kth Largest Element in an Array
+
+
+[1] Simplest Metho using sorting - N * Log N
+
+ ---------------------------------------------------------------------
+  Arrays.sort(nums);
+  return nums[nums.length-k];
+  ---------------------------------------------------------------------
+
+[2] Using Quick Sort - Avg Time - O(N)
+
+---------------------------------------------------------------------
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+                
+        return QuickSort(nums, 0, nums.length-1, nums.length-k);
+    }
+    
+    public int QuickSort(int[] nums, int start, int end, int k){
+        
+        int wall = start;
+        int pivot = end;
+        
+        for(int i=start; i<end; i++){
+            
+        ---------------------------------------------------------------------    if(nums[pivot] > nums[i]){
+                swap(nums, wall++, i);                
+            }- Avg Time - O(N)
+        }
+        swap(nums, wall, pivot);
+        
+        if(wall == k)
+            return nums[wall];
+        else if(wall < k)
+            return QuickSort(nums, wall+1, end, k);
+        else
+            return QuickSort(nums, start, wall-1, k);        
+    }
+    
+    private void swap(int [] nums, int i, int j){
+        
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
+---------------------------------------------------------------------  
+  
+ 
