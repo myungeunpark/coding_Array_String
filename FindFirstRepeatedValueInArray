@@ -1,0 +1,28 @@
+# Find First repeated value in array
+[1] 2 Loop  
+   : Time - O(N*N)
+[2] Using hash set
+   : Time - O(N), space - O(N)
+//------------------------------------------------
+public class FindFirstRepeatedNumber {
+
+	public int firstRepeated(int [] nums){
+		
+		HashSet<Integer> set = new HashSet<>();
+		int min = Integer.MAX_VALUE;
+		for(int i=nums.length-1; i>=0; i--) {
+						
+			int key = nums[i];
+			if(set.contains(key))
+				min = Math.min(i, min);
+			else
+				set.add(key);
+		}
+		
+		if(min == Integer.MAX_VALUE)
+			return -1;
+		else
+			return nums[min];
+	}
+}
+//------------------------------------------------
