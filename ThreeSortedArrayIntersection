@@ -1,0 +1,46 @@
+## Three sorted array intersection
+
+Time - O(N1+N2+N3) = O(N)
+----------------------------------------------------------------------------------
+public class ThreeIntersection {
+
+	public int [] getTreeSortedArrayIntersection(int [] nums1, int [] nums2, int [] nums3) {
+	
+		int inx1 = 0;
+		int inx2 = 0;
+		int inx3 = 0;
+		
+		List<Integer> list = new ArrayList<>();
+		
+		while((inx1 < nums1.length) && (inx2 < nums2.length) && (inx3 < nums3.length)) {
+					
+			if((nums1[inx1] == nums2[inx2]) && (nums2[inx2] == nums3[inx3])) {
+				list.add(nums1[inx1]);
+				inx1++;
+				inx2++;
+				inx3++;
+				
+			}else {
+								
+				if(nums1[inx1] > nums2[inx2]) {
+					
+					if(nums2[inx2] > nums3[inx3])
+						inx3++;
+					else
+						inx2++;
+				}else {
+					if(nums1[inx1] > nums3[inx3])
+						inx3++;
+					else
+						inx1++;
+				}				
+			}			
+		}
+		
+		int [] ret = new int[list.size()];
+		for(int i = 0; i <list.size(); i++) {
+			ret[i] = list.get(i);
+		}
+		return ret;
+	}
+----------------------------------------------------------------------------
