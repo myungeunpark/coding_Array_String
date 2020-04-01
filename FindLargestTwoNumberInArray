@@ -1,0 +1,30 @@
+## Find the largest two number in Array
+
+Time - O(N)
+
+fun findLargestTwoNumbers(nums : IntArray) : IntArray  {
+
+    var ret = IntArray(2)
+    if(nums.size < 2)
+    	return ret
+    	
+    
+    var first = Int.MIN_VALUE
+    var second = Int.MIN_VALUE
+    for(i in nums){
+    
+        if(first < i){
+            second = first
+            first = i
+        }else{
+            if(second < i){
+                second = i
+            }
+        }
+    }
+    
+    ret[0] = first
+    ret[1] = second
+    return ret
+    	
+}
