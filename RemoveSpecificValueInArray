@@ -1,0 +1,25 @@
+# How to remove a given element from array
+
+fun RemoveNumberInArray(nums : IntArray, value : Int) : Int {
+   
+    var index = -1
+    var rearrange = false
+    for(i in nums.indices){
+    
+    	if(nums[i] == value){
+            if(!rearrange){
+                rearrange = true
+                index = i
+            }
+        } else{
+            
+            if(rearrange){
+                nums[index] = nums[i]
+                index++
+            }
+        }   	
+        
+    }
+    return index
+  	
+}
