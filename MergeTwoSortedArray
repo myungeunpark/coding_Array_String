@@ -1,0 +1,51 @@
+
+# Merge Two sorted Array 
+
+[1] new allocated result int [] 
+[2] using array 1 (https://leetcode.com/problems/merge-sorted-array/) 
+-----------------------------------------------------------
+public class MergeTwoSortedArray {
+
+	public int [] merge1(int [] nums1, int [] nums2) {
+		
+		int [] ret = new int[nums1.length + nums2.length];
+		int inx1 = 0;
+		int inx2 = 0;
+		int inx = 0;
+		
+		while(inx1 < nums1.length && inx2 < nums2.length) {
+			
+			if(nums1[inx1] <= nums2[inx2]) 
+				ret[inx++] = nums1[inx1++];
+			else
+				ret[inx++] = nums2[inx2++];
+				
+		}
+		
+		while(inx1 < nums1.length) {
+			ret[inx++] = nums1[inx1++];
+		}
+		while(inx2 < nums2.length) {
+			ret[inx++] = nums2[inx2++];
+		}
+		return ret;
+	}
+	
+	public void merge2(int [] nums1, int [] nums2) {
+		
+		int inx1 = nums1.length - nums2.length - 1;
+		int inx2 = nums2.length - 1;
+		int inx = nums1.length - 1;
+		
+		while(inx1 >= 0 && inx2 >= 0) {
+			
+			if(nums1[inx1] >= nums2[inx2])
+				nums1[inx--] = nums1[inx1--];
+			else
+				nums1[inx--] = nums2[inx2--];
+		}
+		
+		while(inx2 >= 0) {
+			nums1[inx--] = nums2[inx2--];
+		}	
+	}
