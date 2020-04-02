@@ -1,0 +1,31 @@
+# Write a program to find length of longest consecutive sequence in array of integers?
+
+[1] Using Sorting
+  - O(N*LOG(N))
+  
+[2] Using hashset 
+  
+class Solution {
+    public int longestConsecutive(int[] nums) {
+
+        if(nums.length <= 0)
+            return 0;
+        
+        HashSet<Integer> set = new HashSet<>();
+        for(int i=0; i<nums.length; i++)
+            set.add(nums[i]);
+            
+        int max = Integer.MIN_VALUE;
+        for(int i=0; i<nums.length; i++){
+            
+            int val = nums[i];
+            int inx = 0;
+            while(set.contains(val+inx))
+                  inx++;  
+            
+            max = Math.max(inx, max);           
+            
+        }
+        return max;
+    }
+}
