@@ -1,0 +1,71 @@
+
+# Given an array of of size n and a number k, find all elements that appear more than n/k times?
+[1] Using Sorting 
+    - Time : O(N * Log N)
+    
+[2] Using HashMap 
+    - Time : O(N) Space : O(N)
+
+[3] Using Voyer Moor Algorithm 
+    (https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm)
+    - Time : O(N * K)
+    
+--------------------------------------------------------------    
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        
+        int k = 2;
+        int [] count = new int[k];
+        int [] candi = new int[k];
+        
+        for(int i=0; i<nums.length; i++){
+        
+            boolean found = false;
+            for(int j = 0; j <k; j++){
+                
+                if(nums[i] == candi[j]){
+                    
+                    count[j]++;
+                    found = true;
+                }                      
+            }
+            
+            if(!found){
+                
+                boolean hit = false;
+                for(int m = 0; m < k; m++){
+                    
+                    if(count[m] == 0){
+                        candi[m] = nums[i];
+                        count[m]++;
+                        hit = true;
+                        break;
+                    }
+                }
+                if(!hit){
+                    for(int m = 0; m < k; m++)
+                        count[m]--;
+                                   
+                }
+            }
+        }
+        
+        List<Integer> ret = new ArrayList<>();
+        for(int i=0; i<k; i++){
+            int common = 0;
+            for(int j=0; j<nums.length;j++){
+            
+                
+                if(candi[i] == nums[j])
+                    common++;
+            }
+            if(common > nums.length/3 && !ret.contains(candi[i])){
+                ret.add(candi[i]);
+            }
+                
+        }
+        
+        return ret;               
+    }
+}
+----------------------------------------------------------------------------
