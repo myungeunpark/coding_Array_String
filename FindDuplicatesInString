@@ -1,0 +1,66 @@
+
+// Find Duplicates In String
+
+
+// Java
+//--------------------------------------------
+public class FindDuplicatesString {
+
+	public void printDuplicatesHash(String str) {
+		
+		HashMap<Character, Integer> map = new HashMap<>();
+		
+		for(int i=0; i<str.length(); i++) {
+			
+			char key = str.charAt(i);
+			if(map.containsKey(key))
+				map.put(key, map.get(key)+1);
+			else 
+				map.put(key, 1);			
+		}
+		
+		for(char key : map.keySet()) {
+			
+			if(map.get(key) > 1)
+				System.out.println(key + " - " + map.get(key));
+			
+		}
+			
+	}
+	public void printDuplicates(String str) {
+		
+		int [] count = new int[256];
+		Arrays.fill(count, 0);
+		for(int i=0; i<str.length(); i++) 
+			count[str.charAt(i)]++;
+		
+		for(int i=0; i<256; i++) {
+			if(count[i] > 1) {
+				System.out.println((char)i + " - " + count[i]);
+			}
+		}
+		
+	}
+}
+//------------------------------------------------
+
+// Kotlin
+//------------------------------------------------
+fun PrintDuplicatesString(str : String) {
+   
+    var map = HashMap<Char, Int>()
+    val list = str.toCharArray()
+    for(key in list){
+        
+ 		if(map.containsKey(key))
+        	map.put(key, map.getValue(key) + 1)
+        else
+        	map.put(key, 1)
+    }
+    
+    for(key in map.keys){
+		if(map.getValue(key) > 1)
+        	println(key + " - " + map.getValue(key))
+    }   	
+}
+//-----------------------------------------------
