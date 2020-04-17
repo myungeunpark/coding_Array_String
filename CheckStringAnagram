@@ -1,0 +1,45 @@
+// Check if two Strings are anagram
+
+// [1] Using extra count array 
+//--------------------------------------------------
+fun isAnagram2(str1 : String, str2: String) : Boolean {
+    
+    if(str1.length != str2.length)
+    	return false
+	
+    var count = IntArray(26){0}
+    
+    val str1Sort : CharArray = str1.toCharArray()     
+    val str2Sort : CharArray = str2.toCharArray()
+    
+    for(i in str1Sort.indices){
+    	
+        count[(str1Sort[i]-'a')]++
+        count[(str2Sort[i]-'a')]--
+        
+    }
+    
+    for(i in str1Sort.indices){
+        if(count[i] != 0)
+        	return false
+    }
+    
+    return true
+          
+}
+
+// Using sort --> compare
+//----------------------------------------------------
+fun isAnagram(str1 : String, str2: String) : Boolean {
+    
+    if(str1.length != str2.length)
+    	return false
+	
+    val str1Sort : CharArray = str1.toCharArray()     
+    val str2Sort : CharArray = str2.toCharArray()
+    
+    str1Sort.sort()
+    str2Sort.sort()
+    return str1Sort.contentEquals(str2Sort)
+          
+}
