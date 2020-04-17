@@ -1,0 +1,22 @@
+
+// Find index of first non repeated character
+fun findFirstNonRepeated(str: String) : Int {
+    
+    
+    var map = HashMap<Char, Int>()
+    val list = str.toCharArray()
+    for(i in list){
+        if(map.containsKey(i)){
+            map.put(i, map.getValue(i)+1)
+        }else{
+            map.put(i, 1)
+        }
+    }
+    for(i in list.indices){
+        if(map.getValue(list[i]) == 1){
+            return i
+        }
+    }
+    return -1
+          
+}
