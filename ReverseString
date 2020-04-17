@@ -15,3 +15,20 @@ class Solution {
     }
         
 }
+
+// Kotlin
+class Solution {
+    fun reverseString(s: CharArray): Unit {
+        
+        val mid = s.size/2;
+        for(i in 0..mid-1)            
+            swap(s, i, s.size-1-i);    
+    }
+    
+    fun swap(s: CharArray, i : Int, j:Int): Unit{
+        
+        val temp = s[i]
+        s[i] = s[j]
+        s[j] = temp
+    }
+}
