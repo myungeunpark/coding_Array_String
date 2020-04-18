@@ -1,0 +1,6 @@
+  
+ 
+ //String regex = "[0-9]+";
+		String regex = "\\d+";
+		String data = "23343453";
+		System.out.println(data.matches(regex));
