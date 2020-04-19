@@ -1,0 +1,50 @@
+
+// String to Integer number
+// https://leetcode.com/problems/string-to-integer-atoi/submissions/
+
+class Solution {
+    
+    public int myAtoi(String str) {
+     
+        if(str.length() <= 0)
+            return 0;
+        
+        str.trim();
+        int sign = 1;
+        int inx = 0;
+        
+        while(inx < str.length() && (str.charAt(inx) == ' '))
+            inx++;
+                
+        if(inx >= str.length())
+            return 0;
+        
+        if(str.charAt(inx) == '+'){
+            sign = 1;
+            inx++;
+        }else if(str.charAt(inx) == '-'){
+            sign = -1;
+            inx++;
+        }
+        
+        long sum = 0;
+        while(inx < str.length()){
+            
+            if(!Character.isDigit(str.charAt(inx))){
+                break;
+            }else{
+                
+                sum = sum*10 + (str.charAt(inx) - '0');
+                if((sign > 0) && (sum*sign >= Integer.MAX_VALUE))
+                    return Integer.MAX_VALUE;
+                if((sign < 0) && (sum*sign <= Integer.MIN_VALUE))
+                    return Integer.MIN_VALUE;
+            }
+            
+            inx++;
+        }        
+        
+        return (int)sum*sign;
+    } 
+
+}
