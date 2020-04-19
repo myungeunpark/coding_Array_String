@@ -1,0 +1,27 @@
+// How to reverse words in a sentence without using a library method?
+// "Java is best programming language", the output should be "language programming best is Java".
+//  https://leetcode.com/problems/reverse-words-in-a-string
+
+class Solution {
+    public String reverseWords(String s) {
+        
+        String ret = "";
+        if(s.length() <= 0)
+            return ret;
+        
+        String [] list = s.split("\\s");
+        for(int i=list.length-1; i>=0; i--){
+                        
+            if(list[i].length() > 0){
+
+               if(ret.length() > 0)
+                    ret += " ";
+            
+                ret += list[i];
+            }
+        }
+        
+         return ret;
+    }
+    
+}
