@@ -1,0 +1,52 @@
+// Implement strStr().
+// Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+// https://leetcode.com/problems/implement-strstr/
+class Solution {
+    public int strStr(String haystack, String needle) {
+     
+        if(needle.length() <= 0)
+            return 0;
+        
+        if(haystack.length() < needle.length())
+            return -1;
+        
+        char [] h = haystack.toCharArray();
+        char [] n = needle.toCharArray();
+        
+        int hi = 0;
+        int ni = 0;
+        
+        boolean meet = false;
+        
+        while(hi < h.length){
+            
+            if(h[hi] == n[ni]){
+                
+                if(ni == 0)
+                    meet = true;
+                
+                hi++;
+                ni++;
+                
+                if(ni == n.length)
+                    return hi-ni;
+                    
+            }else{
+                
+                if(meet){
+                    hi = hi-ni+1;
+                    ni = 0;
+                    
+                    meet = false;
+                }else{
+                    hi++;                    
+                }
+            }
+        }
+        
+        if(meet && ni == n.length)
+            return hi-ni;
+        else
+            return -1;
+    }
+}
