@@ -1,0 +1,49 @@
+// Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+// https://leetcode.com/problems/longest-palindromic-substring/
+
+class Solution {
+    public String longestPalindrome(String s) {
+     
+        if(s == null)
+            return "";
+        
+        if(s.length() < 2)
+            return s;
+        
+        int maxInx = -1;
+        int max = Integer.MIN_VALUE;
+        for(int i=0; i<s.length(); i++){
+            
+            int lenOdd = getPalindromeLen(s, i, i);
+            int lenEven = getPalindromeLen(s, i, i+1);
+           
+            int inx = -1;
+            int len = -1;
+            if(lenOdd > lenEven){
+                len = lenOdd;
+                inx = i-(len/2);
+            }else{
+                len = lenEven;
+                inx = i + 1 - (len/2);
+            }
+            
+            if(max < len){                
+                max = len;
+                maxInx = inx;
+            }            
+        }
+        
+        return s.substring(maxInx, maxInx+max);
+        
+    }
+    private int getPalindromeLen(String s, int left, int right){
+                
+        while((left>=0) && (right < s.length()) && s.charAt(left) == s.charAt(right)){
+            
+            left--;
+            right++;
+        }
+        
+        return right - left - 1;
+    }
+}
