@@ -1,0 +1,46 @@
+// Given a collection of distinct integers, return all possible permutations.
+// https://leetcode.com/problems/permutations/ 
+//
+class Solution {
+    
+    private List<List<Integer>> ret = null;
+    
+    public List<List<Integer>> permute(int[] nums) {
+    
+        ret = new ArrayList<>();
+        perm(nums, 0, nums.length-1);
+        
+        return ret;
+    }
+    
+    private void perm(int [] nums, int left, int right){
+
+        if(left > right)
+            return;
+        
+        if(left == right){
+            List<Integer> list = new ArrayList<>();
+            for(int item : nums){
+               list.add(item);            
+            }
+            ret.add(list);
+            return;
+        }
+        
+        for(int i=left; i<= right; i++){
+            
+            swap(nums, left, i);
+            perm(nums, left+1, right);
+            swap(nums, left, i);
+        }
+    }
+    
+    private void swap(int [] nums, int left, int right){
+        
+        if(left == right)
+            return;
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
