@@ -3,7 +3,8 @@
    : Time - O(N*N)
 [2] Using hash set
    : Time - O(N), space - O(N)
-//------------------------------------------------
+//--------------------------------------------
+[JAVA]
 public class FindFirstRepeatedNumber {
 
 	public int firstRepeated(int [] nums){
@@ -26,3 +27,23 @@ public class FindFirstRepeatedNumber {
 	}
 }
 //------------------------------------------------
+[KOTLIN]
+
+fun findFirstRepeasted(nums : IntArray) : Int {
+    
+    var hash = HashSet<Int>()
+    var min = Int.MAX_VALUE
+    for(i in nums.size-1 downTo 0){
+        
+        val key = nums[i]
+        if(hash.contains(key))
+           min = Math.min(i, min) 	
+        else
+        	hash.add(key)        	
+    }
+    if(min == Int.MAX_VALUE)
+    	return -1
+    else
+    	return nums[min]
+}
+//----------------------------------------------------

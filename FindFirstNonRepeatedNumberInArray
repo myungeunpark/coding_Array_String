@@ -1,0 +1,52 @@
+# Find first non-repeated numer in array
+
+[1] loop - Time : O(N*N) 
+
+[2] Using HashMap
+   - Time : O(N)
+   
+---------------------------------------------
+[JAVA]
+public int firstNonRepeated(int [] nums){
+		
+		HashMap<Integer, Integer> map = new HashMap<>();
+		
+		for(int i=0; i <nums.length; i++) {
+						
+			int key = nums[i];
+			if(map.containsKey(key)) 
+				map.put(key, map.get(key)+1);
+			else
+				map.put(key,  1);
+		}
+		
+		for(int i=0; i<nums.length; i++) {
+			if(map.get(nums[i]) == 1)
+				return nums[i];
+		}
+		
+		return -1;			
+	}
+  -------------------------------------------------
+  [KOTLIN]
+  fun findFirstNonRepeasted(nums : IntArray) : Int {
+    
+    var hashmap = HashMap<Int, Int>()
+    for(i in nums.indices){
+        
+        val key = nums[i]
+        if(hashmap.contains(key))
+           hashmap.put(key, hashmap.getValue(key)+1) 	
+        else
+        	hashmap.put(key, 1)        	
+    }
+    
+    for(i in nums.indices){
+        
+        if(hashmap.getValue(nums[i]) == 1)
+			return nums[i];
+    }
+    return -1;
+}
+---------------------------------------------------
+  
