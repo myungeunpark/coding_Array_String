@@ -1,0 +1,49 @@
+// Shuffle an Array 
+// https://leetcode.com/problems/shuffle-an-array/submissions/
+
+class Solution {
+
+    int [] origin = null;
+    
+    public Solution(int[] nums) {
+        
+        origin = nums;
+    }
+    
+    /** Resets the array to its original configuration and return it. */
+    public int[] reset() {
+                
+        return origin;
+    }
+    
+    /** Returns a random shuffling of the array. */
+    public int[] shuffle() {
+        
+        int [] ret = new int[origin.length];
+        // copy array
+        List <Integer> list = new ArrayList<>();
+        for(int i=0; i< origin.length; i++){
+            list.add(origin[i]);
+        }
+        
+        Random rand = new Random();
+        
+        int inx = 0;        
+        while(inx < origin.length){
+        
+            int del = rand.nextInt(list.size());
+            ret[inx++] = list.get(del);
+                
+            list.remove(del);        
+        }
+        
+        return ret;
+    }
+}
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(nums);
+ * int[] param_1 = obj.reset();
+ * int[] param_2 = obj.shuffle();
+ */
