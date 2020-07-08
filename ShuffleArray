@@ -17,7 +17,7 @@ class Solution {
     }
     
     /** Returns a random shuffling of the array. */
-    public int[] shuffle() {
+    public int[] shuffle1() {
         
         int [] ret = new int[origin.length];
         // copy array
@@ -38,6 +38,27 @@ class Solution {
         }
         
         return ret;
+    }
+    
+    public int[] shuffle2() {
+        
+        int [] ret = new int[origin.length];
+        ret = origin.clone();
+        Random rand = new Random();
+        
+        for(int i=0; i<ret.length; i++){
+            
+            int j = rand.nextInt(ret.length-i) + i;
+            swap(ret, i, j);
+        }
+        return ret;
+    }
+    
+    private void swap(int [] nums, int i, int j){
+        
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
 
