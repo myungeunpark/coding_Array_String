@@ -4,7 +4,7 @@ How to find duplicate number on Integer array in Java?
 
 [1] Using Sorting
 
-time N* O(N) , Array Rearrangement
+time O(N * logN) , Array Rearrangement
 -----------------------------------------------------
 
 
