@@ -1,6 +1,6 @@
 ## Write a program to find intersection of two sorted arrays
 
-
+// Time Complexity- O(N)
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
         
