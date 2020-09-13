@@ -5,6 +5,8 @@ LeetCode
   - https://leetcode.com/problems/group-anagrams
 
 // [1] Using extra count array 
+// Time Complexity : O(N)
+// Space Complexity : O(1)
 //--------------------------------------------------
 fun isAnagram2(str1 : String, str2: String) : Boolean {
     
@@ -31,8 +33,40 @@ fun isAnagram2(str1 : String, str2: String) : Boolean {
     return true
           
 }
+//----------------------------------------------
+// java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        if(s.length() != t.length())
+            return false;
+        
+        int [] count = new int [26];
+        Arrays.fill(count, 0);
+        
+        
+        for(int i=0; i<s.length(); i++){
+            count[s.charAt(i) - 'a']++;
+        }
+        
+        for(int i=0; i<t.length(); i++){
+            count[t.charAt(i) - 'a']--;
+        }
+        
+        for(int i=0; i<26; i++){
+            
+            if(count[i] != 0)
+                return false;
+        }
+        
+       return true;
+    }
+}
+
 
 // Using sort --> compare
+// Time Complexity : O(N * logN)
+// Space Complexity : O(1)
 //----------------------------------------------------
 fun isAnagram(str1 : String, str2: String) : Boolean {
     
@@ -46,4 +80,20 @@ fun isAnagram(str1 : String, str2: String) : Boolean {
     str2Sort.sort()
     return str1Sort.contentEquals(str2Sort)
           
+}
+//---------------------------------------------------
+// Java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        
+        char [] sArr = s.toCharArray();
+        char [] tArr = t.toCharArray();
+        
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
+        
+        return Arrays.equals(sArr, tArr);
+       
+    }
 }
