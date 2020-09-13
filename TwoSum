@@ -15,11 +15,11 @@ class Solution {
             if(hash.containsKey(diff)){
                    ret[0] = hash.get(diff);
                    ret[1] = i;          
-                   break;         
-            }else{
-                
-                hash.put(nums[i], i);
+                   return ret;      
             }
+                
+            hash.put(nums[i], i);
+            
         }
         
         return ret;
