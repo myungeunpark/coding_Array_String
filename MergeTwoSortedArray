@@ -31,11 +31,12 @@ public class MergeTwoSortedArray {
 		return ret;
 	}
 	
+	// assumption nums1[] array has enough buffer to hold all numbers from nums1 and nums2
 	public void merge2(int [] nums1, int [] nums2) {
 		
 		int inx1 = nums1.length - nums2.length - 1;
 		int inx2 = nums2.length - 1;
-		int inx = nums1.length - 1;
+		int inx = nums1.length  - 1;
 		
 		while(inx1 >= 0 && inx2 >= 0) {
 			
