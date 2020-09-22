@@ -1,0 +1,44 @@
+// https://leetcode.com/problems/flatten-2d-vector/
+//
+class Vector2D {
+
+    int row;
+    int col;
+        
+    int[][] list;
+    public Vector2D(int[][] v) {
+        
+        row = 0;
+        col = 0;
+        list = v;
+    }
+    
+    public int next() {
+    
+       while((row < list.length) && (list[row].length == 0)){ 
+            row++;
+            col = 0;
+        }        
+        int ret = list[row][col];
+        
+        col++;
+        if(row < list.length && col == list[row].length){
+            row++;
+            col = 0;
+        }            
+        
+        return ret;
+        
+    }
+    
+    public boolean hasNext() {
+        
+        while((row < list.length) && (list[row].length == 0)){ 
+            row++;
+            col = 0;
+        }
+        
+        return row < list.length && col < list[row].length; 
+        
+    }
+}
