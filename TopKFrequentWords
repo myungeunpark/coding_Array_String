@@ -1,0 +1,110 @@
+// https://leetcode.com/problems/top-k-frequent-words/
+// [1] 2 TreeMap
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+         
+        List<String> ret = new ArrayList<>();
+        if(words.length <= 0)
+            return ret;
+        
+        // alphabet order
+        TreeMap<String, Integer> map = new TreeMap<>();        
+        for(int i=0; i< words.length; i++){
+            
+            String str = words[i];
+            if(map.containsKey(str))
+                map.put(str, map.get(str) + 1);
+            else
+                map.put(str, 1);
+        }
+        
+        TreeMap<Integer, List<String>> valMap = new TreeMap<>(Collections.reverseOrder());
+        for(String key : map.keySet()){
+            
+            int val = map.get(key);
+            if(valMap.containsKey(val)){
+                
+                List<String> temp = valMap.get(val);
+                temp.add(key);
+                valMap.put(val, temp);
+            }else{
+                List<String> temp = new ArrayList<>();
+                temp.add(key);
+                valMap.put(val, temp);
+            }            
+        }
+        
+        int count = 0;
+        for(int key : valMap.keySet()){
+            
+            List<String> list = valMap.get(key);
+            for(int i=0; i<list.size(); i++){
+                ret.add(list.get(i));
+                count++;
+                if(count == k)
+                    return ret;
+            }
+        }
+        
+        
+        return ret;
+    }
+}
+
+// HashMap + PriorityQueue 
+class Solution {
+    
+    
+    public List<String> topKFrequent(String[] words, int k) {
+         
+        List<String> ret = new ArrayList<>();
+        if(words.length <= 0)
+            return ret;
+        
+        // alphabet order
+        HashMap<String, Integer> map = new HashMap<>();        
+        for(int i=0; i< words.length; i++){
+            
+            String str = words[i];
+            if(map.containsKey(str))
+                map.put(str, map.get(str) + 1);
+            else
+                map.put(str, 1);
+        }
+                    
+        
+        PriorityQueue<Node> queue = new PriorityQueue<>();
+        for(String key : map.keySet()){
+            
+            Node node = new Node(map.get(key), key);
+            queue.add(node);
+        }
+        
+        int count = 0;
+        while(!queue.isEmpty() && count < k){
+            
+           Node node = queue.poll(); 
+           ret.add(node.key);
+           count++;           
+        }
+        
+        
+        return ret;
+    }
+    
+    class Node implements Comparable<Node>{
+            int count;
+            String key;
+            
+            public Node(int count, String key){
+                this.count = count;
+                this.key = key;
+            }
+            
+            public int compareTo(Node other){
+                if(other.count != this.count) return other.count - this.count;
+                else return this.key.compareTo(other.key);
+            }
+    }
+
+}
