@@ -1,0 +1,72 @@
+// Median of Two Sorted Arrays
+//https://leetcode.com/problems/median-of-two-sorted-arrays/
+
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+     
+        int inx1 = 0;
+        int inx2 = 0;
+        
+        // calculate median position
+        double ret = 0;
+        Boolean isEven = false;
+        int medianInx = -1;
+        int sum = nums1.length + nums2.length;
+        if(sum % 2 == 0)            
+            isEven = true;
+        
+         medianInx = sum/2;        
+        
+        int inx = 0;
+        int [] list = new int[sum];
+        while((inx1 < nums1.length) && (inx2 < nums2.length)){
+            
+            if(nums1[inx1] <= nums2[inx2]){
+                list[inx] = nums1[inx1++];
+            }else{
+                list[inx] = nums2[inx2++];
+            }
+            
+            if(inx == medianInx)
+                return getMedian(list, isEven, inx);    
+                
+            inx++;            
+        }
+        
+        while(inx1 < nums1.length){
+                       
+            list[inx] = nums1[inx1++];
+                        
+            if(inx == medianInx) 
+                return getMedian(list, isEven, inx);    
+                
+            inx++;
+            
+        }
+        
+        while(inx2 < nums2.length){
+                    
+            list[inx] = nums2[inx2++];
+            
+            if(inx == medianInx)
+                return getMedian(list, isEven, inx);           
+                
+            inx++;           
+        }
+        
+        return ret;
+    }
+    
+    private double getMedian(int [] list, boolean isEven, int medianInx){
+        
+        double ret = 0;
+        
+        if(!isEven)
+            ret = list[medianInx];
+        else
+            ret = (double)(list[medianInx] + list[medianInx-1])/2;
+        
+        return ret;
+         
+    }
+}
