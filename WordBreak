@@ -1,0 +1,41 @@
+// Word Break
+// https://leetcode.com/problems/word-break/
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+               
+        HashSet<String> set = new HashSet<>();
+        for(int i=0; i<wordDict.size(); i++)
+            set.add(wordDict.get(i));
+        
+        int [] lookup = new int[s.length()];
+        Arrays.fill(lookup, -1);
+        return search(s, set, 0, lookup);     
+    }
+    
+    private boolean search(String s, HashSet<String> set, int start, int [] lookup){
+        
+        if(start >= s.length())
+            return true;
+    
+        if(lookup[start] == 1)
+            return true;
+        if(lookup[start] == 0)
+            return false;
+                       
+        for (int end=start+1; end <= s.length(); end++){
+            String str = s.substring(start, end);            
+            if(set.contains(str)){                
+               
+                if(search(s, set, end, lookup)){
+                    lookup[start] = 1;
+                    return true;
+                }
+            }
+        }
+        
+        lookup[start] = 0;
+        return false;
+        
+    }
+}
