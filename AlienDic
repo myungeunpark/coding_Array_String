@@ -1,0 +1,62 @@
+// Verifying an Alien Dictionary
+// https://leetcode.com/problems/verifying-an-alien-dictionary/
+
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+        
+        HashMap<Character, Integer> map = new HashMap<>();
+        makeOrder(map, order);
+        
+        for(int i=0; i<words.length-1; i++){
+            
+            if(!isAscending(map, words[i], words[i+1]))
+                return false;            
+        }
+        
+        return true;
+    }
+    
+    private boolean isAscending(HashMap<Character, Integer> map, String str1, String str2){
+        
+        // compare i and i+1
+        int min = Math.min(str1.length(), str2.length()); 
+        for(int i=0; i < min; i++){
+
+            if(isSame(map, str1.charAt(i), str2.charAt(i)))
+                continue;
+            
+            if(!isLarger(map, str1.charAt(i), str2.charAt(i)))
+                return false; 
+            else
+                return true;
+        }
+        
+        if((str1.length() - min) > 0)
+            return false;
+        
+        if((str2.length() - min) > 0)
+            return true; 
+        
+        return false;
+        
+    }
+    
+    private void makeOrder(HashMap<Character, Integer> map, String order){
+           
+        int size= order.length();
+        for(int i=0; i<size; i++){            
+            map.put(order.charAt(i), i);
+        }
+    }
+    
+    private boolean isLarger(HashMap<Character, Integer> map, char a, char b){
+        
+          return (map.get(b) - map.get(a)) > 0; 
+        
+    }
+    
+    private boolean isSame(HashMap<Character, Integer> map, char a, char b){
+     
+        return (map.get(b) - map.get(a)) == 0; 
+    }
+}
