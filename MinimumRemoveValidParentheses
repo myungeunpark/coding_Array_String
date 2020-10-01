@@ -1,0 +1,79 @@
+// Minimum Remove to Make Valid Parentheses
+// https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
+// [1] Using Stack
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+       
+        int count = 0;
+        Stack<Character> stack = new Stack<>();
+        for(int i=0; i<s.length(); i++){
+            
+            char ch = s.charAt(i); 
+            if(ch == '('){
+                count++;
+                stack.push(ch);
+            }else if(ch == ')'){
+                
+                if(count > 0){                   
+                    //push
+                    count--;
+                    stack.push(ch);
+                }                    
+            }else{
+                stack.push(ch);
+            }
+        }
+        
+        String ret = "";
+        while(!stack.isEmpty()){
+            
+            char ch = stack.pop();
+            if(count > 0 && ch == '(')
+                count--;
+            else  
+                ret = String.valueOf(ch) + ret;
+        }
+        
+        return ret;
+    }
+}
+
+// [2] String Buffer & '(' Character Index List
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+       
+                
+        //Stack<Character> stack = new Stack<>();
+        StringBuilder ret =  new StringBuilder();
+        List<Integer> inx =  new ArrayList<>();
+        
+        for(int i=0; i<s.length(); i++){
+            
+            char ch = s.charAt(i); 
+            if(ch == '('){                
+                inx.add(ret.length());
+                ret.append(ch);
+            }else if(ch == ')'){
+                
+                if(inx.size() > 0){                   
+                    //push
+                    inx.remove(inx.size()-1);  
+                    ret.append(ch);
+                }                
+            }else{
+                ret.append(ch);
+            }
+        }
+
+        int index = inx.size()-1;
+        while(index >= 0){
+            
+            int i = inx.get(index);            
+            ret.delete(i, i+1);
+            inx.remove(index);
+            index--;
+        }
+        
+        return ret.toString();
+    }
+}
