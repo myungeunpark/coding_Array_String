@@ -1,0 +1,67 @@
+/*
+Given a list of numbers, return number of sub-arrays that satisfies the following condition:
+
+All elements in the sub-array appear at-least 2 times.
+
+Examples:
+
+Given a list, [1,2,1,2,4], your code should return 1 : ([1,2,1,2]),
+Given a list, [1,2,3,3,3,2,4], your code should return 4 ([3,3], [3,3], [3,3,3], [2,3,3,3,2])
+*/
+
+package Algorithm;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class LeastTwo {
+
+	List<List<Integer>> get(int [] nums){
+		List<List<Integer>> ret = new ArrayList<>();
+		for(int i=0; i<nums.length-1; i++) 			
+			duplicate(nums, i, ret);
+		
+		return ret;
+	}
+	
+	void duplicate(int [] nums, int start, List<List<Integer>> ret){
+				
+		HashMap<Integer, Integer> map = new HashMap<>();
+		int i = start;
+		while(i < nums.length) {			
+			
+			map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);			
+			if(map.get(nums[i]) >= 2) {
+				
+				boolean noDup = true;
+				for(int val : map.values()) {
+					if(val < 2) {
+						noDup = false;
+						break;
+					}
+				}
+				
+				if(noDup) {
+					
+					List<Integer> list = new ArrayList<>();
+					for(int s = start; s <= i; s++)
+						list.add(nums[s]);
+					ret.add(list);
+					noDup = false;
+				}
+			}
+			
+			i++;
+		}
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int [] nums = {1,2,3,3,3,2,4};
+		LeastTwo two = new LeastTwo();
+		List<List<Integer>> ret = two.get(nums);
+		System.out.println(ret.toString());
+	}
+
+}
