@@ -2,18 +2,14 @@ public class Triangle {
 
 	private boolean isTriangle(int [] nums, int i) {
 		
-		int sum = nums[i];
-		int maxInx = i;
-		for(int j=i+1; j<=i+2; j++) {
-			sum += nums[j];
-			if(nums[maxInx] < nums[j])
-				maxInx = j;
-		}
-		
-		if(nums[maxInx] < sum-nums[maxInx])
-			return true;
-		else
+		int a=nums[i];
+		int b=nums[i+1];
+		int c=nums[i+2];
+		if(a+b<=c || b+c<=a || a+c<=b)
 			return false;
+		else
+			return true;
+	
 	}
 	public boolean [] getTriangleList(int [] nums) {
 		
