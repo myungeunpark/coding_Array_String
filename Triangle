@@ -1,0 +1,27 @@
+public class Triangle {
+
+	private boolean isTriangle(int [] nums, int i) {
+		
+		int sum = nums[i];
+		int maxInx = i;
+		for(int j=i+1; j<=i+2; j++) {
+			sum += nums[j];
+			if(nums[maxInx] < nums[j])
+				maxInx = j;
+		}
+		
+		if(nums[maxInx] < sum-nums[maxInx])
+			return true;
+		else
+			return false;
+	}
+	public boolean [] getTriangleList(int [] nums) {
+		
+		boolean [] ret = new boolean[nums.length-2];
+		for(int i=0; i<nums.length-2; i++) {
+			 ret[i] = isTriangle(nums, i);
+			
+		}
+		return ret;
+		
+	}
