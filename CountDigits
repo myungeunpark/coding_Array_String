@@ -1,0 +1,44 @@
+/*
+Given a positive integer n, starting from 0 to n, if the number contains 0, 2, 4, count once. Implement a function that requires returning the count. Examples are:
+n = 100, so from 0 to 100, how many numbers contain the digits 0, 2, 4
+*/
+public class CountDigit {
+	
+	public int getCount(int n) {
+		
+		int count = 0;
+		for(int num = 0; num <= n; num++) {
+
+			if((num == 0) || (num == 2) || (num == 4) ||
+			   isDigit(num, 0) || 
+			   isDigit(num, 2) || 
+			   isDigit(num, 4)) {
+			   count++;
+			   System.out.println(num);
+			}
+		}
+		
+		return count;
+	}
+	
+	private boolean isDigit(int num,  int digit) {
+				
+		 while(num > 0) {			 
+			 if(num%10 == digit)
+				 return true;
+			 
+			 num = num/10;
+		 }
+		 
+		 return false;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		CountDigit digit = new CountDigit();
+		int count = digit.getCount(100);
+		System.out.println("Total Count : " + count);
+	}
+
+}
