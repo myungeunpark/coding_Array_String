@@ -1,0 +1,29 @@
+// Get All Palindrom from input String 
+
+public List<String> getAllPalindrom(String input){
+		
+		List<String> list = new ArrayList<>();
+		
+		for(int i=0; i<input.length(); i++) {
+			
+			getPalindrom(input, i, i, list);
+			getPalindrom(input, i, i+1, list);
+		}
+		
+		return list;
+	}
+	
+	private void getPalindrom(String input, int left, int right, List<String> list){
+		
+		while((left >= 0) && (right < input.length()) 
+				&& (left<=right) && (input.charAt(left) == input.charAt(right))) {
+			
+			if(right-left >= 1) {
+				list.add(input.substring(left, right+1));
+			}
+			
+			left--;
+			right++;				
+		}
+		
+	}
